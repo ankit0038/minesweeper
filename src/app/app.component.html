@@ -1,5 +1,12 @@
-<table>
-  <tr *ngFor="let row of board.board; index as i">
-    <td *ngFor="let col of row; index as j">{{ board.board[i][j].proximityMines }}</td>
-  </tr>
-</table>
+<div class="container">
+  <div class="game-board">
+    <table>
+      <tr *ngFor="let row of board.board; index as i">
+        <td *ngFor="let cell of row; index as j" (click)="onClickOfCell(cell)">
+          <span *ngIf="!cell.isMine && cell.state=='open'">{{ cell.proximityMines }}</span>
+          <span *ngIf="cell.isMine && cell.state=='open'"><i class="fa fa-bomb"></i></span>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

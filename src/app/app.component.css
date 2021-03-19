@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    background-color: rgb(123, 143, 123);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.game-board {
+    background-color: rgb(131, 107, 107);
+}
+
+th, td {
+    border: 3px solid black;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    font-size: 150%;
+}
+
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.fa-bomb {
+    font-size: 140%;
+}
