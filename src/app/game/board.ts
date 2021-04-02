@@ -5,12 +5,14 @@ export class Board {
     nRows: number = 0;
     nCols: number = 0;
     nMines: number = 0;
+    score: number;
     nUnExposedCells: number;
     board: Cell[][] = [];
     constructor(rows: number, cols: number, mines: number) {
         this.nRows = rows;
         this.nCols = cols;
         this.nMines = mines;
+        this.score = 0;
         this.nUnExposedCells = rows * cols;
         this.initBoard();
         this.assignMines();

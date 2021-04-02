@@ -14,11 +14,11 @@ export class AppComponent {
   board: Board;
 
   constructor(public gameOver: GameOver, public gameWon: GameWon) {
-    this.board = new Board(10, 10, 10);
+    this.board = new Board(9, 9, 12);
   }
 
   reset() {
-    this.board = new Board(10, 10, 10);
+    this.board = new Board(9, 9, 12);
   }
 
   onClickOfCell(cell: Cell) {
@@ -26,19 +26,25 @@ export class AppComponent {
       cell.state = 'open';
       if(cell.isMine){
         this.gameOver.gameOverDialog().afterClosed().subscribe(result => {
-          this.reset();
+          this.board.revealAll();
         });
       }else if(cell.proximityMines === 0){
+        this.board.score++;
         this.board.revealAllEmptyNeighbouringCells(cell);
       }else{
+        this.board.score++;
         this.board.nUnExposedCells--;
       }
       if(this.board.nUnExposedCells === this.board.nMines){
         this.gameWon.gameWonDialog().afterClosed().subscribe(result => {
-          this.reset();
+          this.board.revealAll();
         });
       }
       console.log(this.board.nUnExposedCells);
     }
+  }
+
+  getCellClass(cell: Cell): string {
+    return 'num-cell-'+cell.proximityMines;
   }
 }

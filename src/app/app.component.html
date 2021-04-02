@@ -1,14 +1,66 @@
-<div class="container">
-  <div class="game-board">
-    <table>
-      <tr *ngFor="let row of board.board; index as i">
-        <td *ngFor="let cell of row; index as j" (click)="onClickOfCell(cell)">
-          <span *ngIf="!cell.isMine && cell.state=='open'">{{ cell.proximityMines }}</span>
-          <span *ngIf="cell.isMine && cell.state=='open'"><i class="fa fa-bomb"></i></span>
-        </td>
-      </tr>
-    </table>
+<div class="main-container">
+  <div class="action-area">
+    <div class="container-1"></div>
+    <div class="score-board">
+      <div class="level-1-border-container">
+        <div class="top-left-corner"></div>
+        <div class="top-border"></div>
+        <div class="top-right-corner"></div>
+      </div>
+      <div class="level-2-border-container">
+        <div class="upper-left-border"></div>
+        <div class="upper-middle-area">
+          <div class="score-mine-cnt">
+            <div title="Mine Count" class="mine-cnt">
+              {{ board.nMines }}
+            </div>
+            <div title="Restart" class="restart" (click)="reset()">
+              <i class="fa fa-power-off"></i>
+            </div>
+            <div title="Score" class="score">
+              {{ board.score }}
+            </div>
+            
+          </div>
+        </div>
+        <div class="upper-right-border"></div>
+      </div>
+      <div class="level-3-border-container">
+        <div class="middle-left-joint"></div>
+        <div class="middle-border"></div>
+        <div class="middle-right-joint"></div>
+      </div>
+    </div>
+    <div class="game-board">
+      <div class="level-4-border-container">
+        <div class="lower-left-border"></div>
+        <div class="play-area">
+          <div class="row" *ngFor="let row of board.board; index as i">
+            <div [ngClass]="{'cell-close': cell.state === 'close', 'cell-open': cell.state === 'open'}" *ngFor="let cell of row; index as j" (click)="onClickOfCell(cell)">
+              <table>
+                <tr>
+                  <td [ngClass]="{'red-cell': cell.state === 'open' && cell.isMine}">
+                    <span class="num-cell" [ngClass]="getCellClass(cell)" *ngIf="cell.state === 'open' && !cell.isMine">{{ cell.proximityMines }}</span>
+                    <span *ngIf="cell.isMine && cell.state === 'open'"><i class="fa fa-bomb"></i></span>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="lower-right-border"></div>
+      </div>
+      <div class="level-5-border-container">
+        <div class="bottom-left-corner"></div>
+        <div class="bottom-border"></div>
+        <div class="bottom-right-corner"></div>
+      </div>
+      <div class="container-4">
+        <button class="btn-revealAll" (click)="board.revealAll()">Reveal All</button>
+        <button class="btn-reset" (click)="reset()">Reset</button>
+      </div>
+    </div>
+    
   </div>
-  <button mat-button (click)="board.revealAll()">Reveal All</button>
-  <button mat-button (click)="reset()">Reset</button>
+  
 </div>
